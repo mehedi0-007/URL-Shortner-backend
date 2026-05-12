@@ -1,0 +1,55 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../prisma/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Admin {
+  id    String @unique @default(cuid())
+  name  String
+  email String @unique
+}
+
+model User {
+  id        String   @unique @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  urls      Url[]
+}
+
+model Url {
+  id             String   @unique @default(cuid())
+  originalUrl    String
+  shortUrl       String   @unique
+  clicks         Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  expiresAt      DateTime
+  creatorIp      String?
+  creatorCountry String?
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  visits         Visit[]
+
+  @@index([creatorIp])
+  @@index([creatorCountry])
+}
+
+model Visit {
+  id        String   @unique @default(cuid())
+  ipAdd     String
+  country   String
+  city      String
+  visitedAt DateTime @default(now())
+  urlId     String
+  url       Url      @relation(fields: [urlId], references: [id], onDelete: Cascade)
+
+  @@index([ipAdd])
+  @@index([country])
+}
