@@ -1,6 +1,7 @@
 import {
   ConflictException,
   Injectable,
+  InternalServerErrorException,
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -30,15 +31,11 @@ export class UserService {
       },
     });
 
+    if (!data) throw new InternalServerErrorException('Operation failed');
+
     return {
       success: true,
       message: 'User created successfully',
-      data: {
-        id: data.id,
-        name: data.name,
-        email: data.email,
-        createdAt: data.createdAt,
-      },
     };
   }
 

@@ -745,7 +745,8 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const AdminScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  email: 'email'
+  email: 'email',
+  password: 'password'
 } as const
 
 export type AdminScalarFieldEnum = (typeof AdminScalarFieldEnum)[keyof typeof AdminScalarFieldEnum]
@@ -772,6 +773,7 @@ export const UrlScalarFieldEnum = {
   expiresAt: 'expiresAt',
   creatorIp: 'creatorIp',
   creatorCountry: 'creatorCountry',
+  creatorCity: 'creatorCity',
   userId: 'userId'
 } as const
 

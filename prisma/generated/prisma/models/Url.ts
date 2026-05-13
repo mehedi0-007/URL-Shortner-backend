@@ -44,6 +44,7 @@ export type UrlMinAggregateOutputType = {
   expiresAt: Date | null
   creatorIp: string | null
   creatorCountry: string | null
+  creatorCity: string | null
   userId: string | null
 }
 
@@ -57,6 +58,7 @@ export type UrlMaxAggregateOutputType = {
   expiresAt: Date | null
   creatorIp: string | null
   creatorCountry: string | null
+  creatorCity: string | null
   userId: string | null
 }
 
@@ -70,6 +72,7 @@ export type UrlCountAggregateOutputType = {
   expiresAt: number
   creatorIp: number
   creatorCountry: number
+  creatorCity: number
   userId: number
   _all: number
 }
@@ -93,6 +96,7 @@ export type UrlMinAggregateInputType = {
   expiresAt?: true
   creatorIp?: true
   creatorCountry?: true
+  creatorCity?: true
   userId?: true
 }
 
@@ -106,6 +110,7 @@ export type UrlMaxAggregateInputType = {
   expiresAt?: true
   creatorIp?: true
   creatorCountry?: true
+  creatorCity?: true
   userId?: true
 }
 
@@ -119,6 +124,7 @@ export type UrlCountAggregateInputType = {
   expiresAt?: true
   creatorIp?: true
   creatorCountry?: true
+  creatorCity?: true
   userId?: true
   _all?: true
 }
@@ -219,6 +225,7 @@ export type UrlGroupByOutputType = {
   expiresAt: Date
   creatorIp: string | null
   creatorCountry: string | null
+  creatorCity: string | null
   userId: string
   _count: UrlCountAggregateOutputType | null
   _avg: UrlAvgAggregateOutputType | null
@@ -255,6 +262,7 @@ export type UrlWhereInput = {
   expiresAt?: Prisma.DateTimeFilter<"Url"> | Date | string
   creatorIp?: Prisma.StringNullableFilter<"Url"> | string | null
   creatorCountry?: Prisma.StringNullableFilter<"Url"> | string | null
+  creatorCity?: Prisma.StringNullableFilter<"Url"> | string | null
   userId?: Prisma.StringFilter<"Url"> | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   visits?: Prisma.VisitListRelationFilter
@@ -270,6 +278,7 @@ export type UrlOrderByWithRelationInput = {
   expiresAt?: Prisma.SortOrder
   creatorIp?: Prisma.SortOrderInput | Prisma.SortOrder
   creatorCountry?: Prisma.SortOrderInput | Prisma.SortOrder
+  creatorCity?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   visits?: Prisma.VisitOrderByRelationAggregateInput
@@ -288,6 +297,7 @@ export type UrlWhereUniqueInput = Prisma.AtLeast<{
   expiresAt?: Prisma.DateTimeFilter<"Url"> | Date | string
   creatorIp?: Prisma.StringNullableFilter<"Url"> | string | null
   creatorCountry?: Prisma.StringNullableFilter<"Url"> | string | null
+  creatorCity?: Prisma.StringNullableFilter<"Url"> | string | null
   userId?: Prisma.StringFilter<"Url"> | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   visits?: Prisma.VisitListRelationFilter
@@ -303,6 +313,7 @@ export type UrlOrderByWithAggregationInput = {
   expiresAt?: Prisma.SortOrder
   creatorIp?: Prisma.SortOrderInput | Prisma.SortOrder
   creatorCountry?: Prisma.SortOrderInput | Prisma.SortOrder
+  creatorCity?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
   _count?: Prisma.UrlCountOrderByAggregateInput
   _avg?: Prisma.UrlAvgOrderByAggregateInput
@@ -324,6 +335,7 @@ export type UrlScalarWhereWithAggregatesInput = {
   expiresAt?: Prisma.DateTimeWithAggregatesFilter<"Url"> | Date | string
   creatorIp?: Prisma.StringNullableWithAggregatesFilter<"Url"> | string | null
   creatorCountry?: Prisma.StringNullableWithAggregatesFilter<"Url"> | string | null
+  creatorCity?: Prisma.StringNullableWithAggregatesFilter<"Url"> | string | null
   userId?: Prisma.StringWithAggregatesFilter<"Url"> | string
 }
 
@@ -337,6 +349,7 @@ export type UrlCreateInput = {
   expiresAt: Date | string
   creatorIp?: string | null
   creatorCountry?: string | null
+  creatorCity?: string | null
   user: Prisma.UserCreateNestedOneWithoutUrlsInput
   visits?: Prisma.VisitCreateNestedManyWithoutUrlInput
 }
@@ -351,6 +364,7 @@ export type UrlUncheckedCreateInput = {
   expiresAt: Date | string
   creatorIp?: string | null
   creatorCountry?: string | null
+  creatorCity?: string | null
   userId: string
   visits?: Prisma.VisitUncheckedCreateNestedManyWithoutUrlInput
 }
@@ -365,6 +379,7 @@ export type UrlUpdateInput = {
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   creatorIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creatorCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creatorCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutUrlsNestedInput
   visits?: Prisma.VisitUpdateManyWithoutUrlNestedInput
 }
@@ -379,6 +394,7 @@ export type UrlUncheckedUpdateInput = {
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   creatorIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creatorCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creatorCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   visits?: Prisma.VisitUncheckedUpdateManyWithoutUrlNestedInput
 }
@@ -393,6 +409,7 @@ export type UrlCreateManyInput = {
   expiresAt: Date | string
   creatorIp?: string | null
   creatorCountry?: string | null
+  creatorCity?: string | null
   userId: string
 }
 
@@ -406,6 +423,7 @@ export type UrlUpdateManyMutationInput = {
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   creatorIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creatorCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creatorCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UrlUncheckedUpdateManyInput = {
@@ -418,6 +436,7 @@ export type UrlUncheckedUpdateManyInput = {
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   creatorIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creatorCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creatorCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -441,6 +460,7 @@ export type UrlCountOrderByAggregateInput = {
   expiresAt?: Prisma.SortOrder
   creatorIp?: Prisma.SortOrder
   creatorCountry?: Prisma.SortOrder
+  creatorCity?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
@@ -458,6 +478,7 @@ export type UrlMaxOrderByAggregateInput = {
   expiresAt?: Prisma.SortOrder
   creatorIp?: Prisma.SortOrder
   creatorCountry?: Prisma.SortOrder
+  creatorCity?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
@@ -471,6 +492,7 @@ export type UrlMinOrderByAggregateInput = {
   expiresAt?: Prisma.SortOrder
   creatorIp?: Prisma.SortOrder
   creatorCountry?: Prisma.SortOrder
+  creatorCity?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
@@ -561,6 +583,7 @@ export type UrlCreateWithoutUserInput = {
   expiresAt: Date | string
   creatorIp?: string | null
   creatorCountry?: string | null
+  creatorCity?: string | null
   visits?: Prisma.VisitCreateNestedManyWithoutUrlInput
 }
 
@@ -574,6 +597,7 @@ export type UrlUncheckedCreateWithoutUserInput = {
   expiresAt: Date | string
   creatorIp?: string | null
   creatorCountry?: string | null
+  creatorCity?: string | null
   visits?: Prisma.VisitUncheckedCreateNestedManyWithoutUrlInput
 }
 
@@ -616,6 +640,7 @@ export type UrlScalarWhereInput = {
   expiresAt?: Prisma.DateTimeFilter<"Url"> | Date | string
   creatorIp?: Prisma.StringNullableFilter<"Url"> | string | null
   creatorCountry?: Prisma.StringNullableFilter<"Url"> | string | null
+  creatorCity?: Prisma.StringNullableFilter<"Url"> | string | null
   userId?: Prisma.StringFilter<"Url"> | string
 }
 
@@ -629,6 +654,7 @@ export type UrlCreateWithoutVisitsInput = {
   expiresAt: Date | string
   creatorIp?: string | null
   creatorCountry?: string | null
+  creatorCity?: string | null
   user: Prisma.UserCreateNestedOneWithoutUrlsInput
 }
 
@@ -642,6 +668,7 @@ export type UrlUncheckedCreateWithoutVisitsInput = {
   expiresAt: Date | string
   creatorIp?: string | null
   creatorCountry?: string | null
+  creatorCity?: string | null
   userId: string
 }
 
@@ -671,6 +698,7 @@ export type UrlUpdateWithoutVisitsInput = {
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   creatorIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creatorCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creatorCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutUrlsNestedInput
 }
 
@@ -684,6 +712,7 @@ export type UrlUncheckedUpdateWithoutVisitsInput = {
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   creatorIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creatorCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creatorCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -697,6 +726,7 @@ export type UrlCreateManyUserInput = {
   expiresAt: Date | string
   creatorIp?: string | null
   creatorCountry?: string | null
+  creatorCity?: string | null
 }
 
 export type UrlUpdateWithoutUserInput = {
@@ -709,6 +739,7 @@ export type UrlUpdateWithoutUserInput = {
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   creatorIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creatorCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creatorCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visits?: Prisma.VisitUpdateManyWithoutUrlNestedInput
 }
 
@@ -722,6 +753,7 @@ export type UrlUncheckedUpdateWithoutUserInput = {
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   creatorIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creatorCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creatorCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visits?: Prisma.VisitUncheckedUpdateManyWithoutUrlNestedInput
 }
 
@@ -735,6 +767,7 @@ export type UrlUncheckedUpdateManyWithoutUserInput = {
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   creatorIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creatorCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creatorCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -778,6 +811,7 @@ export type UrlSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   expiresAt?: boolean
   creatorIp?: boolean
   creatorCountry?: boolean
+  creatorCity?: boolean
   userId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   visits?: boolean | Prisma.Url$visitsArgs<ExtArgs>
@@ -794,6 +828,7 @@ export type UrlSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extension
   expiresAt?: boolean
   creatorIp?: boolean
   creatorCountry?: boolean
+  creatorCity?: boolean
   userId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["url"]>
@@ -808,6 +843,7 @@ export type UrlSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extension
   expiresAt?: boolean
   creatorIp?: boolean
   creatorCountry?: boolean
+  creatorCity?: boolean
   userId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["url"]>
@@ -822,10 +858,11 @@ export type UrlSelectScalar = {
   expiresAt?: boolean
   creatorIp?: boolean
   creatorCountry?: boolean
+  creatorCity?: boolean
   userId?: boolean
 }
 
-export type UrlOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "originalUrl" | "shortUrl" | "clicks" | "createdAt" | "updatedAt" | "expiresAt" | "creatorIp" | "creatorCountry" | "userId", ExtArgs["result"]["url"]>
+export type UrlOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "originalUrl" | "shortUrl" | "clicks" | "createdAt" | "updatedAt" | "expiresAt" | "creatorIp" | "creatorCountry" | "creatorCity" | "userId", ExtArgs["result"]["url"]>
 export type UrlInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   visits?: boolean | Prisma.Url$visitsArgs<ExtArgs>
@@ -854,6 +891,7 @@ export type $UrlPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     expiresAt: Date
     creatorIp: string | null
     creatorCountry: string | null
+    creatorCity: string | null
     userId: string
   }, ExtArgs["result"]["url"]>
   composites: {}
@@ -1289,6 +1327,7 @@ export interface UrlFieldRefs {
   readonly expiresAt: Prisma.FieldRef<"Url", 'DateTime'>
   readonly creatorIp: Prisma.FieldRef<"Url", 'String'>
   readonly creatorCountry: Prisma.FieldRef<"Url", 'String'>
+  readonly creatorCity: Prisma.FieldRef<"Url", 'String'>
   readonly userId: Prisma.FieldRef<"Url", 'String'>
 }
     

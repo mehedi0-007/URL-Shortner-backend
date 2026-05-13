@@ -155,9 +155,9 @@ export type VisitGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 
 export type VisitGroupByOutputType = {
   id: string
-  ipAdd: string
-  country: string
-  city: string
+  ipAdd: string | null
+  country: string | null
+  city: string | null
   visitedAt: Date
   urlId: string
   _count: VisitCountAggregateOutputType | null
@@ -185,9 +185,9 @@ export type VisitWhereInput = {
   OR?: Prisma.VisitWhereInput[]
   NOT?: Prisma.VisitWhereInput | Prisma.VisitWhereInput[]
   id?: Prisma.StringFilter<"Visit"> | string
-  ipAdd?: Prisma.StringFilter<"Visit"> | string
-  country?: Prisma.StringFilter<"Visit"> | string
-  city?: Prisma.StringFilter<"Visit"> | string
+  ipAdd?: Prisma.StringNullableFilter<"Visit"> | string | null
+  country?: Prisma.StringNullableFilter<"Visit"> | string | null
+  city?: Prisma.StringNullableFilter<"Visit"> | string | null
   visitedAt?: Prisma.DateTimeFilter<"Visit"> | Date | string
   urlId?: Prisma.StringFilter<"Visit"> | string
   url?: Prisma.XOR<Prisma.UrlScalarRelationFilter, Prisma.UrlWhereInput>
@@ -195,9 +195,9 @@ export type VisitWhereInput = {
 
 export type VisitOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  ipAdd?: Prisma.SortOrder
-  country?: Prisma.SortOrder
-  city?: Prisma.SortOrder
+  ipAdd?: Prisma.SortOrderInput | Prisma.SortOrder
+  country?: Prisma.SortOrderInput | Prisma.SortOrder
+  city?: Prisma.SortOrderInput | Prisma.SortOrder
   visitedAt?: Prisma.SortOrder
   urlId?: Prisma.SortOrder
   url?: Prisma.UrlOrderByWithRelationInput
@@ -208,9 +208,9 @@ export type VisitWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.VisitWhereInput | Prisma.VisitWhereInput[]
   OR?: Prisma.VisitWhereInput[]
   NOT?: Prisma.VisitWhereInput | Prisma.VisitWhereInput[]
-  ipAdd?: Prisma.StringFilter<"Visit"> | string
-  country?: Prisma.StringFilter<"Visit"> | string
-  city?: Prisma.StringFilter<"Visit"> | string
+  ipAdd?: Prisma.StringNullableFilter<"Visit"> | string | null
+  country?: Prisma.StringNullableFilter<"Visit"> | string | null
+  city?: Prisma.StringNullableFilter<"Visit"> | string | null
   visitedAt?: Prisma.DateTimeFilter<"Visit"> | Date | string
   urlId?: Prisma.StringFilter<"Visit"> | string
   url?: Prisma.XOR<Prisma.UrlScalarRelationFilter, Prisma.UrlWhereInput>
@@ -218,9 +218,9 @@ export type VisitWhereUniqueInput = Prisma.AtLeast<{
 
 export type VisitOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  ipAdd?: Prisma.SortOrder
-  country?: Prisma.SortOrder
-  city?: Prisma.SortOrder
+  ipAdd?: Prisma.SortOrderInput | Prisma.SortOrder
+  country?: Prisma.SortOrderInput | Prisma.SortOrder
+  city?: Prisma.SortOrderInput | Prisma.SortOrder
   visitedAt?: Prisma.SortOrder
   urlId?: Prisma.SortOrder
   _count?: Prisma.VisitCountOrderByAggregateInput
@@ -233,71 +233,71 @@ export type VisitScalarWhereWithAggregatesInput = {
   OR?: Prisma.VisitScalarWhereWithAggregatesInput[]
   NOT?: Prisma.VisitScalarWhereWithAggregatesInput | Prisma.VisitScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Visit"> | string
-  ipAdd?: Prisma.StringWithAggregatesFilter<"Visit"> | string
-  country?: Prisma.StringWithAggregatesFilter<"Visit"> | string
-  city?: Prisma.StringWithAggregatesFilter<"Visit"> | string
+  ipAdd?: Prisma.StringNullableWithAggregatesFilter<"Visit"> | string | null
+  country?: Prisma.StringNullableWithAggregatesFilter<"Visit"> | string | null
+  city?: Prisma.StringNullableWithAggregatesFilter<"Visit"> | string | null
   visitedAt?: Prisma.DateTimeWithAggregatesFilter<"Visit"> | Date | string
   urlId?: Prisma.StringWithAggregatesFilter<"Visit"> | string
 }
 
 export type VisitCreateInput = {
   id?: string
-  ipAdd: string
-  country: string
-  city: string
+  ipAdd?: string | null
+  country?: string | null
+  city?: string | null
   visitedAt?: Date | string
   url: Prisma.UrlCreateNestedOneWithoutVisitsInput
 }
 
 export type VisitUncheckedCreateInput = {
   id?: string
-  ipAdd: string
-  country: string
-  city: string
+  ipAdd?: string | null
+  country?: string | null
+  city?: string | null
   visitedAt?: Date | string
   urlId: string
 }
 
 export type VisitUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  ipAdd?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
+  ipAdd?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   url?: Prisma.UrlUpdateOneRequiredWithoutVisitsNestedInput
 }
 
 export type VisitUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  ipAdd?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
+  ipAdd?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   urlId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type VisitCreateManyInput = {
   id?: string
-  ipAdd: string
-  country: string
-  city: string
+  ipAdd?: string | null
+  country?: string | null
+  city?: string | null
   visitedAt?: Date | string
   urlId: string
 }
 
 export type VisitUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  ipAdd?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
+  ipAdd?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type VisitUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  ipAdd?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
+  ipAdd?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   urlId?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -383,17 +383,17 @@ export type VisitUncheckedUpdateManyWithoutUrlNestedInput = {
 
 export type VisitCreateWithoutUrlInput = {
   id?: string
-  ipAdd: string
-  country: string
-  city: string
+  ipAdd?: string | null
+  country?: string | null
+  city?: string | null
   visitedAt?: Date | string
 }
 
 export type VisitUncheckedCreateWithoutUrlInput = {
   id?: string
-  ipAdd: string
-  country: string
-  city: string
+  ipAdd?: string | null
+  country?: string | null
+  city?: string | null
   visitedAt?: Date | string
 }
 
@@ -428,42 +428,42 @@ export type VisitScalarWhereInput = {
   OR?: Prisma.VisitScalarWhereInput[]
   NOT?: Prisma.VisitScalarWhereInput | Prisma.VisitScalarWhereInput[]
   id?: Prisma.StringFilter<"Visit"> | string
-  ipAdd?: Prisma.StringFilter<"Visit"> | string
-  country?: Prisma.StringFilter<"Visit"> | string
-  city?: Prisma.StringFilter<"Visit"> | string
+  ipAdd?: Prisma.StringNullableFilter<"Visit"> | string | null
+  country?: Prisma.StringNullableFilter<"Visit"> | string | null
+  city?: Prisma.StringNullableFilter<"Visit"> | string | null
   visitedAt?: Prisma.DateTimeFilter<"Visit"> | Date | string
   urlId?: Prisma.StringFilter<"Visit"> | string
 }
 
 export type VisitCreateManyUrlInput = {
   id?: string
-  ipAdd: string
-  country: string
-  city: string
+  ipAdd?: string | null
+  country?: string | null
+  city?: string | null
   visitedAt?: Date | string
 }
 
 export type VisitUpdateWithoutUrlInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  ipAdd?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
+  ipAdd?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type VisitUncheckedUpdateWithoutUrlInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  ipAdd?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
+  ipAdd?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type VisitUncheckedUpdateManyWithoutUrlInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  ipAdd?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
+  ipAdd?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -526,9 +526,9 @@ export type $VisitPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    ipAdd: string
-    country: string
-    city: string
+    ipAdd: string | null
+    country: string | null
+    city: string | null
     visitedAt: Date
     urlId: string
   }, ExtArgs["result"]["visit"]>
