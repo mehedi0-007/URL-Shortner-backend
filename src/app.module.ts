@@ -5,10 +5,20 @@ import { PrismaService } from './prisma/prisma.service';
 import { PrismaModule } from './prisma/prisma.module';
 import { UserModule } from './user/user.module';
 import { UrlModule } from './url/url.module';
+import { AuthModule } from './auth/auth.module';
+import { LoggerInterceptor } from './interceptors/logger/logger.interceptor';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 
 @Module({
-  imports: [PrismaModule, UserModule, UrlModule],
+  imports: [PrismaModule, UserModule, UrlModule, AuthModule],
   controllers: [AppController],
-  providers: [AppService, PrismaService],
+  providers: [
+    AppService,
+    PrismaService,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: LoggerInterceptor,
+    },
+  ],
 })
 export class AppModule {}

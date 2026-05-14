@@ -555,10 +555,6 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type UrlCreateNestedOneWithoutVisitsInput = {
   create?: Prisma.XOR<Prisma.UrlCreateWithoutVisitsInput, Prisma.UrlUncheckedCreateWithoutVisitsInput>
   connectOrCreate?: Prisma.UrlCreateOrConnectWithoutVisitsInput
