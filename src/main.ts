@@ -13,17 +13,24 @@ async function bootstrap() {
       whitelist: true,
       forbidNonWhitelisted: true,
       transform: true,
+      transformOptions: {
+        enableImplicitConversion: true,
+      },
     }),
   );
 
+  const corsOrigins = process.env.CORS_ORIGIN?.split(',') ?? [
+    'https://url-shortner-frontend-gamma.vercel.app',
+  ];
+
   app.enableCors({
-    origin: ['*'],
+    origin: corsOrigins,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   });
 
-  await app.listen(process.env.PORT ?? 3001);
+  await app.listen(process.env.PORT || 3001);
 }
 
 bootstrap();

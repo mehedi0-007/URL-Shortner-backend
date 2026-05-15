@@ -51,7 +51,7 @@ export class AuthService {
 
     res.cookie('refreshToken', tokens.refresh_token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'DEV' ? true : false,
+      secure: process.env.NODE_ENV === 'DEV' ? false : true,
       sameSite: 'lax',
       maxAge: 10 * 24 * 60 * 60 * 1000,
     });
