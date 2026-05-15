@@ -9,7 +9,7 @@ import { Strategy } from 'passport-jwt';
 import bcrypt from 'bcrypt';
 import { PrismaService } from 'src/prisma/prisma.service';
 
-type pld = { sub: string; email: string; role: string };
+type pld = { sub: string; email: string; role: string; refresh_token?: string };
 
 @Injectable()
 export class RefreshStrategy extends PassportStrategy(Strategy, 'jwt-refresh') {
@@ -34,6 +34,8 @@ export class RefreshStrategy extends PassportStrategy(Strategy, 'jwt-refresh') {
     const isValid = await bcrypt.compare(rft, user.refresh ? user.refresh : '');
     if (!isValid) throw new UnauthorizedException();
 
-    return { ...payload, rft };
+    payload.refresh_token = rft;
+
+    return { ...payload };
   }
 }

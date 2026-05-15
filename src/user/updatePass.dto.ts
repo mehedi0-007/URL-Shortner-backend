@@ -2,9 +2,9 @@ import { IsString, MinLength } from 'class-validator';
 
 export class UpdatePassDto {
   @IsString()
-  currentPass: string;
+  currentPass!: string;
 
   @IsString()
   @MinLength(8)
-  newPass: string;
+  newPass!: string;
 }

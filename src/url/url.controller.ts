@@ -10,17 +10,20 @@ import {
   Post,
   Req,
   Res,
+  UseGuards,
 } from '@nestjs/common';
 import 'dotenv/config';
 import { UrlService } from './url.service';
 import { CreateUrlDto } from './createUrl.dto';
 import type { Request, Response } from 'express';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth/jwt-auth.guard';
 
 @Controller('url')
 export class UrlController {
   constructor(private readonly urlService: UrlService) {}
 
   @Post()
+  @UseGuards(JwtAuthGuard)
   async createShortUrl(
     @Body() dto: CreateUrlDto,
     @Req() req: Request,
@@ -28,7 +31,7 @@ export class UrlController {
     const reqIp = req.headers['x-forwarded-for'];
     const ip =
       typeof reqIp === 'string' ? reqIp.split(',')[0] : (req.ip as string);
-    const userId = req.headers.userid as string;
+    const userId = ((req as any)?.user?.sub as string) ?? '';
     const newShortUrl = await this.urlService.createUrl(userId, dto, ip);
 
     if (!newShortUrl)
@@ -57,6 +60,7 @@ export class UrlController {
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
   async deleteUrl(@Param('id') id: string): Promise<object> {
     const delData = await this.urlService.deleteShortUrl(id);
 
@@ -67,6 +71,7 @@ export class UrlController {
   }
 
   @Patch('extend/:id')
+  @UseGuards(JwtAuthGuard)
   async extendUrl(@Param('id') id: string) {
     const extended = await this.urlService.extendUrlData(id);
 
@@ -79,6 +84,7 @@ export class UrlController {
   }
 
   @Patch('regenerate/:id')
+  @UseGuards(JwtAuthGuard)
   async regenerate(@Param('id') id: string): Promise<object> {
     const regData = await this.urlService.regenerateShortUrl(id);
 

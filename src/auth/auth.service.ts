@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Injectable,
   InternalServerErrorException,
@@ -7,10 +8,15 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from 'src/prisma/prisma.service';
 import bcrypt from 'bcrypt';
-import { Response } from 'express';
+import { Response, Request } from 'express';
 
 type logData = { email: string; password: string };
-type payload = { sub: string; email: string; role: string };
+type payload = {
+  sub: string;
+  email: string;
+  role: string;
+  refresh_token?: string;
+};
 
 @Injectable()
 export class AuthService {
@@ -24,9 +30,9 @@ export class AuthService {
       where: { email: data.email },
     });
 
-    if (!user) throw new NotFoundException();
+    if (!user) throw new NotFoundException('User not found.');
 
-    const isval = await bcrypt.compare(user.password, data.password);
+    const isval = await bcrypt.compare(data.password, user.password);
 
     if (!isval) throw new UnauthorizedException();
 
@@ -34,7 +40,7 @@ export class AuthService {
 
     const tokens = await this.getTokens(payload);
 
-    const hashed = await bcrypt.hash(tokens.refresh_token, 11);
+    const hashed = await bcrypt.hash(tokens.refresh_token, 10);
 
     await this.prisma.user.update({
       where: { id: user.id },
@@ -53,7 +59,7 @@ export class AuthService {
     return { access_token: tokens.access_token };
   }
 
-  async logOut(data: logData): Promise<any> {
+  async logOut(data: payload, res: Response): Promise<any> {
     const userData = await this.prisma.user.findUnique({
       where: { email: data.email },
     });
@@ -67,9 +73,19 @@ export class AuthService {
           refresh: null,
         },
       });
+
+      res.clearCookie('refreshToken');
     } catch {
       throw new InternalServerErrorException();
     }
+  }
+
+  async refresh(userData: payload): Promise<object> {
+    const { refresh_token, ...data } = userData;
+
+    const tokens = await this.getTokens(data);
+
+    return { ...tokens };
   }
 
   async getTokens(payload: payload) {

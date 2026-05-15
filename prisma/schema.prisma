@@ -36,6 +36,7 @@ model Url {
 
   @@index([creatorIp])
   @@index([shortUrl])
+  @@index([originalUrl])
   @@index([creatorCountry])
 }
 
