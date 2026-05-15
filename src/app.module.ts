@@ -8,9 +8,10 @@ import { UrlModule } from './url/url.module';
 import { AuthModule } from './auth/auth.module';
 import { LoggerInterceptor } from './interceptors/logger/logger.interceptor';
 import { APP_INTERCEPTOR } from '@nestjs/core';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @Module({
-  imports: [PrismaModule, UserModule, UrlModule, AuthModule],
+  imports: [PrismaModule, UserModule, UrlModule, AuthModule, DashboardModule],
   controllers: [AppController],
   providers: [
     AppService,

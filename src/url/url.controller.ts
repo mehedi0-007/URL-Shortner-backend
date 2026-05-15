@@ -31,6 +31,7 @@ export class UrlController {
     const reqIp = req.headers['x-forwarded-for'];
     const ip =
       typeof reqIp === 'string' ? reqIp.split(',')[0] : (req.ip as string);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const userId = ((req as any)?.user?.sub as string) ?? '';
     const newShortUrl = await this.urlService.createUrl(userId, dto, ip);
 
