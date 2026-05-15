@@ -1,88 +1,125 @@
-# URL Shortener API
+# 🚀 URL Shortener API
 
-A feature-rich URL Shortener REST API built with [NestJS](https://nestjs.com/), [Prisma](https://www.prisma.io/), and [PostgreSQL](https://www.postgresql.org/).
+<p align="center">
+  A high-performance, robust, and feature-rich <strong>URL Shortener REST API</strong> built to securely shrink links, track visitors, and manage user roles.
+</p>
 
-## Features
+<p align="center">
+  <img src="https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white" alt="NestJS">
+  <img src="https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white" alt="Prisma">
+  <img src="https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL">
+  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
+</p>
 
-- **User Authentication**: Secure registration and login using JWT (JSON Web Tokens), including Access and Refresh tokens.
-- **Role-based Authorization**: Role-based access control (RBAC) separating "user" functionality from administrative features.
-- **Advanced URL Shortening**: Create shortened URLs with expiration dates.
-- **Analytics & Tracking**: Tracks URL visits including the IP address, country, and city (via `geoip-lite`).
-- **Data Persistence**: Uses PostgreSQL for robust relational data modeling.
-- **Secure Password Hashing**: Utilizes bcrypt to safely store user credentials.
+---
 
-## Tech Stack
+## ✨ Features
 
-- **Framework**: [NestJS](https://nestjs.com/) (Node.js/TypeScript)
-- **ORM / Database Tool**: [Prisma](https://www.prisma.io/)
-- **Database**: PostgreSQL
-- **Security**: Passport, JWT, bcrypt
-- **Validation**: `class-validator` and `class-transformer`
-- **Geolocation**: `geoip-lite`
+- 🔐 **JWT Authentication**: Highly secure login and token refresh flows.
+- 🛡️ **Role-Based Access Control**: Route protections for authenticated users.
+- 🔗 **Advanced URL Shortening**: Easily map long URLs to short codes. Built-in link regeneration.
+- ⏳ **URL Expiration Policies**: Self-expiring short URLs with extension capabilities.
+- 🌍 **Visitor Analytics**: Tracks IP addresses and converts them into geological data (City/Country) upon each visit using `geoip-lite`.
+- 🗄️ **Robust Persistence**: Optimized schema managed through Prisma onto a robust PostgreSQL database.
 
-## Prerequisites
+---
 
-- [Node.js](https://nodejs.org/) (v16+)
-- [PostgreSQL](https://www.postgresql.org/) database running
-- npm, yarn, or pnpm
+## 🛠️ Tech Stack
 
-## Getting Started
+- **Backend**: NestJS, Node.js, Express.js
+- **Database Architecture**: PostgreSQL, Prisma ORM
+- **Security**: Passport.js, JWT, bcrypt
+- **Validation**: class-validator, class-transformer
+- **Dev-Tools**: ESLint, Prettier, Jest (Testing)
 
-### 1. Installation
+---
 
-Clone the repository and install the dependencies:
+## 📦 Dependency Setup Guide
+
+Follow these simple steps directly after cloning the repository.
+
+### 1. Prerequisites
+Ensure you have the following installed locally:
+- [Node.js](https://nodejs.org/en/) (v16.x or newer)
+- [PostgreSQL](https://www.postgresql.org/) (Running instances)
+- [Git](https://git-scm.com/)
+
+### 2. Install Project Dependencies
+Run the installation command from the project root:
 
 ```bash
 npm install
 ```
 
-### 2. Environment Configuration
-
-Create a `.env` file in the root directory (using `.env.example` if available) and add the following variables:
+### 3. Environment Variables
+Create a `.env` file mechanically mimicking your setup needs:
 
 ```env
-# Database connection string
-DATABASE_URL="postgresql://user:password@localhost:5432/url_shortner?schema=public"
+# Server Target URLs
+SHORT_URL_BASE="http://localhost:3000/"
 
-# JWT Secrets for authentication
-JWT_SECRET="your_jwt_access_secret_here"
-JWT_REFRESH_SECRET="your_jwt_refresh_secret_here"
+# Database Engine Setup
+DATABASE_URL="postgresql://<USER>:<PASSWORD>@localhost:5432/url_shortner?schema=public"
+
+# Credentials
+JWT_SECRET="your_highly_secure_access_secret"
+JWT_REFRESH_SECRET="your_highly_secure_refresh_secret"
 ```
 
-### 3. Database Setup
-
-Apply the Prisma migrations to set up your database schema and generate the Prisma client:
+### 4. Setup the Database
+Migrate your PostgreSQL DB logic and generate the Prisma Client bindings:
 
 ```bash
 npx prisma migrate dev
 npx prisma generate
 ```
 
-### 4. Running the Application
+---
+
+## 🚀 How to Use the Project
+
+### Running the Application
+
+For the best development experience, run the application utilizing built-in watcher files natively provided by NestJS.
 
 ```bash
-# development mode
-npm run start
+# 🟡 Local Development Mode
+$ npm run start
 
-# watch mode (recommended for development)
-npm run start:dev
+# 🟢 Watch Mode (Recommended for testing features on the fly)
+$ npm run start:dev
 
-# production mode
-npm run build
-npm run start:prod
+# 🔴 Production Deployment Node
+$ npm run build
+$ npm run start:prod
 ```
 
-The application will start on `http://localhost:3000` (by default).
+If utilizing standard routes, your local instance should operate correctly on: `http://localhost:3000/`.
 
-## Scripts
+---
 
-- `npm run build`: Compile the application
-- `npm run format`: Format code using Prettier
-- `npm run lint`: Lint code using ESLint
-- `npm run test`: Run automated tests
+## 📖 API Reference Endpoints
 
-## API Concepts
+All major endpoints for the platform are listed below:
 
-- **Auth**: `POST /auth/register`, `POST /auth/login`, `POST /auth/refresh`
-- **URLs**: Users can authenticate and create short URLs, retrieve basic details, and URLs have built-in expiration policies.
-- **Analytics**: Each click on a shortened URL is recorded with geographical data to help users track visit origins.
+### 🔐 Authentication Endpoints (`/auth`)
+*   `POST /auth/login` - Authenticate an existing user and return access/refresh tokens.
+*   `POST /auth/refresh` - Swap a refresh token for a newly updated access token. *(Guarded)*
+*   `POST /auth/logout` - Invalidate current session and log the user out. *(Guarded)*
+
+### 👤 User Endpoints (`/user`)
+*   `POST /user/register` - Create a brand new user profile within the database.
+*   `GET /user/:id` - Fetch user details globally utilizing a standard UUID/Cuid. *(Guarded)*
+*   `PATCH /user/:id` - Modify or update the target user password securely. *(Guarded)*
+*   `DELETE /user/:id` - Wipe the target user entity entirely from the system. *(Guarded)*
+
+### 🔗 URL Endpoints (`/url`)
+*   `POST /url` - Shorten a fresh URL payload string context to a standard short URL code. *(Guarded)*
+*   `GET /url/:shortCode` - Re-direct operation pointing `<domain>/url/<shortCode>` to actual URL. Tracks visits & analytics.
+*   `PATCH /url/extend/:id` - Re-extend the timestamp validations to +24H from now for a given `Url`. *(Guarded)*
+*   `PATCH /url/regenerate/:id` - Refresh the `<shortCode>` strings completely mapping to existing payload contexts. *(Guarded)*
+*   `DELETE /url/:id` - Wipes context mapping parameters ensuring links drop explicitly completely. *(Guarded)*
+
+---
+
+This configuration structure is explicitly developed and structured via `@nestjs/core`, `@nestjs/common`, and custom components designed throughout current local workspaces mapped logically in `src/`.
