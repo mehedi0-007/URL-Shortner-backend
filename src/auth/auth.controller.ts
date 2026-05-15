@@ -18,6 +18,7 @@ type payload = {
   sub: string;
   email: string;
   role: string;
+  name: string;
   refresh_token?: string;
 };
 
@@ -44,7 +45,10 @@ export class AuthController {
 
   @Post('logout')
   @UseGuards(JwtAuthGuard)
-  async userLogOut(@Req() req: Request, @Res() res: Response): Promise<any> {
+  async userLogOut(
+    @Req() req: Request,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<any> {
     await this.authService.logOut(req.user as payload, res);
     return { msg: 'User logout success' };
   }

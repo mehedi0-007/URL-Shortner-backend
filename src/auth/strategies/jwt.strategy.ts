@@ -3,7 +3,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import 'dotenv/config';
 
-type JWTPayload = { sub: string; email: string; role: string };
+type JWTPayload = { sub: string; email: string; role: string; name: string };
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {

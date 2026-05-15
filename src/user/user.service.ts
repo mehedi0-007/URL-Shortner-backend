@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ConflictException,
   Injectable,
   InternalServerErrorException,
@@ -66,20 +67,44 @@ export class UserService {
 
     if (!userData) throw new NotFoundException('User not found ');
 
-    const passMatch = await bcrypt.compare(dto.currentPass, userData.password);
+    const updates: { name?: string; password?: string } = {};
+    const wantsPassword = Boolean(dto.currentPass || dto.newPass);
 
-    if (!passMatch) throw new UnauthorizedException('Password did not match');
+    if (wantsPassword) {
+      if (!dto.currentPass || !dto.newPass) {
+        throw new BadRequestException(
+          'Both currentPass and newPass are required',
+        );
+      }
 
-    const hashedPass = await bcrypt.hash(dto.newPass, 10);
+      const passMatch = await bcrypt.compare(
+        dto.currentPass,
+        userData.password,
+      );
+
+      if (!passMatch) throw new UnauthorizedException('Password did not match');
+
+      updates.password = await bcrypt.hash(dto.newPass, 10);
+    }
+
+    if (dto.name) {
+      updates.name = dto.name;
+    }
+
+    if (Object.keys(updates).length === 0) {
+      throw new BadRequestException('No update fields provided');
+    }
 
     await this.Prisma.user.update({
       where: { id: userid },
-      data: { password: hashedPass },
+      data: updates,
     });
 
     return {
       success: true,
-      message: 'Password Updated successfully',
+      message: wantsPassword
+        ? 'Password updated successfully'
+        : 'Profile updated successfully',
     };
   }
 

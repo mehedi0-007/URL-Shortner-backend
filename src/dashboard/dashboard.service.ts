@@ -13,25 +13,25 @@ export class DashboardService {
     const now = new Date();
 
     const totalUrls = await this.prisma.url.count({
-      where: { id: userId },
+      where: { userId },
     });
 
     const activeUrls = await this.prisma.url.count({
       where: {
-        id: userId,
+        userId,
         expiresAt: { gt: now },
       },
     });
 
     const expiredUrl = await this.prisma.url.count({
       where: {
-        id: userId,
+        userId,
         expiresAt: { lt: now },
       },
     });
 
     const Clicks = await this.prisma.url.aggregate({
-      where: { id: userId },
+      where: { userId },
       _sum: { clicks: true },
     });
 
@@ -48,13 +48,13 @@ export class DashboardService {
 
     const [urls, totalUrls] = await Promise.all([
       this.prisma.url.findMany({
-        where: { id: userId },
+        where: { userId },
         orderBy: { createdAt: 'desc' },
         skip: skips,
         take: limitNumber,
       }),
 
-      this.prisma.url.count({ where: { id: userId } }),
+      this.prisma.url.count({ where: { userId } }),
     ]);
 
     const data = urls.map((url) => ({
@@ -73,10 +73,10 @@ export class DashboardService {
     return {
       data,
       pagination: {
-        page,
-        limit,
+        page: pageNumber,
+        limit: limitNumber,
         totalUrls,
-        totalPages: Math.ceil(totalUrls / limit),
+        totalPages: Math.ceil(totalUrls / limitNumber),
       },
     };
   }

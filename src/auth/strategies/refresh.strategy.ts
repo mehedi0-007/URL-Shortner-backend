@@ -9,7 +9,13 @@ import { Strategy } from 'passport-jwt';
 import bcrypt from 'bcrypt';
 import { PrismaService } from '../../prisma/prisma.service';
 
-type pld = { sub: string; email: string; role: string; refresh_token?: string };
+type pld = {
+  sub: string;
+  email: string;
+  role: string;
+  name: string;
+  refresh_token?: string;
+};
 
 @Injectable()
 export class RefreshStrategy extends PassportStrategy(Strategy, 'jwt-refresh') {

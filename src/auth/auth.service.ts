@@ -15,6 +15,7 @@ type payload = {
   sub: string;
   email: string;
   role: string;
+  name: string;
   refresh_token?: string;
 };
 
@@ -36,7 +37,12 @@ export class AuthService {
 
     if (!isval) throw new UnauthorizedException();
 
-    const payload = { sub: user.id, email: user.email, role: user.role };
+    const payload = {
+      sub: user.id,
+      email: user.email,
+      role: user.role,
+      name: user.name,
+    };
 
     const tokens = await this.getTokens(payload);
 
