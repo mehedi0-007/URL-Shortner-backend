@@ -41,14 +41,17 @@ export class DashboardService {
   }
 
   async getUserUrls(userId: string, page: number, limit: number) {
-    const skips = (page - 1) * limit;
+    const pageNumber = Number(page) || 1;
+    const limitNumber = Number(limit) || 10;
+
+    const skips = (pageNumber - 1) * limitNumber;
 
     const [urls, totalUrls] = await Promise.all([
       this.prisma.url.findMany({
         where: { id: userId },
         orderBy: { createdAt: 'desc' },
         skip: skips,
-        take: limit,
+        take: limitNumber,
       }),
 
       this.prisma.url.count({ where: { id: userId } }),

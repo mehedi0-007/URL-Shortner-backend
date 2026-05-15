@@ -6,7 +6,6 @@ import cookieParser from 'cookie-parser';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // app.useGlobalInterceptors(new LoggerInterceptor());
   app.use(cookieParser());
 
   app.useGlobalPipes(
@@ -17,6 +16,14 @@ async function bootstrap() {
     }),
   );
 
-  await app.listen(process.env.PORT ?? 3000);
+  app.enableCors({
+    origin: ['*'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  });
+
+  await app.listen(process.env.PORT ?? 3001);
 }
+
 bootstrap();
