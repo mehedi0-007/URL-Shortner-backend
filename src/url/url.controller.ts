@@ -16,7 +16,7 @@ import 'dotenv/config';
 import { UrlService } from './url.service';
 import { CreateUrlDto } from './createUrl.dto';
 import type { Request, Response } from 'express';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth/jwt-auth.guard';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth/jwt-auth.guard';
 
 @Controller('url')
 export class UrlController {

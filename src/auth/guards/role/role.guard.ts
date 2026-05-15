@@ -1,7 +1,7 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { ROLE_KEY } from 'src/auth/decorators/roles/roles.decorator';
-import { Role } from 'src/auth/decorators/roles/roles.enum';
+import { ROLE_KEY } from '../../decorators/roles/roles.decorator';
+import { Role } from '../../decorators/roles/roles.enum';
 import { Request } from 'express';
 
 type JWTPayload = { sub: string; email: string; role: Role };

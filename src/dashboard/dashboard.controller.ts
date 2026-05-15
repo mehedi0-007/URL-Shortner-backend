@@ -1,10 +1,10 @@
 import { Controller, Get, Param, Query, UseGuards } from '@nestjs/common';
 import { DashboardService } from './dashboard.service';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth/jwt-auth.guard';
-import { UserInfo } from 'src/common/decorator/user.decorator';
-import { Role } from 'src/auth/decorators/roles/roles.enum';
-import { Roles } from 'src/auth/decorators/roles/roles.decorator';
-import { RoleGuard } from 'src/auth/guards/role/role.guard';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth/jwt-auth.guard';
+import { UserInfo } from '../common/decorator/user.decorator';
+import { Role } from '../auth/decorators/roles/roles.enum';
+import { Roles } from '../auth/decorators/roles/roles.decorator';
+import { RoleGuard } from '../auth/guards/role/role.guard';
 
 @Controller('dashboard')
 export class DashboardController {
