@@ -68,27 +68,20 @@ export class UserService {
     if (!userData) throw new NotFoundException('User not found ');
 
     const updates: { name?: string; password?: string } = {};
-    const wantsPassword = Boolean(dto.currentPass || dto.newPass);
+    const wantsPassword = Boolean(dto.password || dto.newPassword);
 
     if (wantsPassword) {
-      if (!dto.currentPass || !dto.newPass) {
+      if (!dto.password || !dto.newPassword) {
         throw new BadRequestException(
-          'Both currentPass and newPass are required',
+          'Both password and newPassword are required',
         );
       }
 
-      const passMatch = await bcrypt.compare(
-        dto.currentPass,
-        userData.password,
-      );
+      const passMatch = await bcrypt.compare(dto.password, userData.password);
 
       if (!passMatch) throw new UnauthorizedException('Password did not match');
 
-      updates.password = await bcrypt.hash(dto.newPass, 10);
-    }
-
-    if (dto.name) {
-      updates.name = dto.name;
+      updates.password = await bcrypt.hash(dto.newPassword, 10);
     }
 
     if (Object.keys(updates).length === 0) {
