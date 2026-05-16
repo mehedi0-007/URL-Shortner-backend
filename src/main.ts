@@ -26,7 +26,7 @@ async function bootstrap() {
   ];
 
   app.enableCors({
-    origin: 'https://url-shortner-frontend-gamma.vercel.app',
+    origin: corsOrigins,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
